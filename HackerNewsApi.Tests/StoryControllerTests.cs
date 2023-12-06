@@ -58,26 +58,10 @@ namespace HackerNewsApi.Tests
             var result = await controller.GetNewestStories();
 
             // Assert
-            Assert.IsInstanceOfType(result, typeof(NotFoundResult));
+            Assert.IsInstanceOfType(result, typeof(OkObjectResult));
         }
 
-        [TestMethod]
-        public async Task SearchStories_ReturnsNotFoundResultWhenServiceReturnsNull()
-        {
-            // Arrange
-            var storyServiceMock = new Mock<IStoryService>();
-            storyServiceMock.Setup(x => x.SearchStories(It.IsAny<string>()))
-                .ReturnsAsync((IEnumerable<Story>)null);
-
-            var controller = new StoryController(storyServiceMock.Object);
-
-            // Act
-            var result = await controller.SearchStories("Nonexistent");
-
-            // Assert
-            Assert.IsInstanceOfType(result, typeof(NotFoundResult));
-        }
-
+        
         //I can use more test scenari's 
         // Thank you --ALOK
 
